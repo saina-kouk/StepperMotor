@@ -1,11 +1,11 @@
 # Stepper Motor Instrument
 
-##Intro
+## Intro
 
-##How it works
+## How it works
 
-###Assembling the motors
+### Assembling the motors
 
-###Coding the music
+### Coding the music
 
-##Demo
+## Demo
