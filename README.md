@@ -8,4 +8,6 @@
 
 ### Coding the music
 
+Frequencies of notes are found (https://en.wikipedia.org/wiki/Piano_key_frequencies) and can be used to obtain the desired period with the formula 1/frequency.
+
 ## Demo
