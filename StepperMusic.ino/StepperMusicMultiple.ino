@@ -53,39 +53,63 @@ void loop() {
   unsigned long currentMillis = millis();
   unsigned long currentMicros = micros();
   //find the note durations and set end time
-  isDone(currentMillis, M1, 0);
-  isDone(currentMillis, M2, 1);
-  isDone(currentMillis, M3, 2);
-  isDone(currentMillis, M4, 3);
-  //find period lengths and play notes
-  changeNote(currentMillis, M1, 0);
-  changeNote(currentMillis, M2, 1);
-  changeNote(currentMillis, M3, 2);
-  changeNote(currentMillis, M4, 3);
-}
-
-//Helper Functions
-void isDone(unsigned long current, int motor, int num){
-  if (current >= nextNote[num]){
-    currRotation[num]++;
-    nextNote[num] = getNote(motor[currRotation[num]][1]);
+  if (currentMillis >= nextNote[0]){
+    currRotation[0]++;
+    nextNote[0] = getNote(M1[currRotation[0]][1]);
     wait[0] = 1;
+  }if (currentMillis >= nextNote[1]){
+    currRotation[1]++;
+    nextNote[1] = getNote(M2[currRotation[1]][1]);
+  }if (currentMillis >= nextNote[2]){
+    currRotation[2]++;
+    nextNote[2] = getNote(M3[currRotation[2]][1]);
+  }if (currentMillis >= nextNote[3]){
+    currRotation[3]++;
+    nextNote[3] = getNote(M4[currRotation[3]][1]);
   }
-}
-
-void changeNote(unsigned long current, int motor, int num){
-  String pin = stepPin + String(num)
-  if (current >= noteLength[num]){
-      if (wait[num] > 0){
-        if (wait[num] == gap) 
-          wait[num] = 0;
-        else
-          wait[num]++;
+  //find period lengths and play notes
+  if (currentMicros >= noteLength[0]){
+    if (wait[0] > 0){
+      if (wait[0] == gap) wait[0] = 0;
+      else wait[0]++;
       }
-      else{
-        currNote[num] = !currNote[num];
-        digitalWrite(pin, currNote[num]);
-        noteLength[num] = getPeriod(motor[currRotation[num]][0]); 
+     else{
+      currNote[0] = !currNote[0];
+      digitalWrite(stepPin1, currNote[0]);
+      noteLength[0] = getPeriod(M1[currRotation[0]][0]); 
+     }
+   }
+   if (currentMicros >= noteLength[1]){
+    if (wait[1] > 0){
+      if (wait[1] == gap) wait[1] = 0;
+      else wait[1]++;
+      }
+     else{
+      currNote[1] = !currNote[1];
+      digitalWrite(stepPin2, currNote[1]);
+      noteLength[1] = getPeriod(M2[currRotation[1]][0]); 
+     }
+   }
+   if (currentMicros >= noteLength[2]){
+    if (wait[2] > 0){
+      if (wait[2] == gap) wait[2] = 0;
+      else wait[2]++;
+      }
+     else{
+      currNote[2] = !currNote[2];
+      digitalWrite(stepPin3, currNote[2]);
+      noteLength[2] = getPeriod(M3[currRotation[2]][0]); 
+     }
+   }
+   if (currentMicros >= noteLength[3]){
+    if (wait[3] > 0){
+      if (wait[3] == gap) wait[3] = 0;
+      else wait[3]++;
+      }
+     else{
+      currNote[3] = !currNote[3];
+      digitalWrite(stepPin4, currNote[3]);
+      noteLength[3] = getPeriod(M4[currRotation[3]][0]); 
      }
    }
 }
