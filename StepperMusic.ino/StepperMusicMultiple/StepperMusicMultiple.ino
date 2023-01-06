@@ -5,7 +5,7 @@ const int stepPin3 = 4;
 const int stepPin4 = 5;
 
 //values for timing
-int tempo = 100;
+int tempo = 120;
 int gap = 500;
 int wait[] = {0,0,0,0};
 bool currNote[] = {LOW,LOW,LOW,LOW};
@@ -16,7 +16,7 @@ unsigned long getNote(unsigned long duration){return ((duration*tempo)+millis())
 //period for notes is given by 1/frequency, to allow for better periods I multiplied by 10^6 to obtain the values
 //the notes are arrays where the indices represent the note period at each octive
 unsigned long C[] = {61156, 30578, 15289, 7644, 3822, 1911, 955, 477, 238};
-unsigned long Cs[] = {0, 0, 0, 0, 0, 0, 0, 451, 225};
+unsigned long Cs[] = {57723, 28861, 14431, 7215, 3608, 1804, 902, 451, 225};
 unsigned long D[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 unsigned long Ds[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 unsigned long E[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -50,66 +50,5 @@ void setup() {
 
 void loop() {
   //main code: runs music for song
-  unsigned long currentMillis = millis();
-  unsigned long currentMicros = micros();
-  //find the note durations and set end time
-  if (currentMillis >= nextNote[0]){
-    currRotation[0]++;
-    nextNote[0] = getNote(M1[currRotation[0]][1]);
-    wait[0] = 1;
-  }if (currentMillis >= nextNote[1]){
-    currRotation[1]++;
-    nextNote[1] = getNote(M2[currRotation[1]][1]);
-  }if (currentMillis >= nextNote[2]){
-    currRotation[2]++;
-    nextNote[2] = getNote(M3[currRotation[2]][1]);
-  }if (currentMillis >= nextNote[3]){
-    currRotation[3]++;
-    nextNote[3] = getNote(M4[currRotation[3]][1]);
-  }
-  //find period lengths and play notes
-  if (currentMicros >= noteLength[0]){
-    if (wait[0] > 0){
-      if (wait[0] == gap) wait[0] = 0;
-      else wait[0]++;
-      }
-     else{
-      currNote[0] = !currNote[0];
-      digitalWrite(stepPin1, currNote[0]);
-      noteLength[0] = getPeriod(M1[currRotation[0]][0]); 
-     }
-   }
-   if (currentMicros >= noteLength[1]){
-    if (wait[1] > 0){
-      if (wait[1] == gap) wait[1] = 0;
-      else wait[1]++;
-      }
-     else{
-      currNote[1] = !currNote[1];
-      digitalWrite(stepPin2, currNote[1]);
-      noteLength[1] = getPeriod(M2[currRotation[1]][0]); 
-     }
-   }
-   if (currentMicros >= noteLength[2]){
-    if (wait[2] > 0){
-      if (wait[2] == gap) wait[2] = 0;
-      else wait[2]++;
-      }
-     else{
-      currNote[2] = !currNote[2];
-      digitalWrite(stepPin3, currNote[2]);
-      noteLength[2] = getPeriod(M3[currRotation[2]][0]); 
-     }
-   }
-   if (currentMicros >= noteLength[3]){
-    if (wait[3] > 0){
-      if (wait[3] == gap) wait[3] = 0;
-      else wait[3]++;
-      }
-     else{
-      currNote[3] = !currNote[3];
-      digitalWrite(stepPin4, currNote[3]);
-      noteLength[3] = getPeriod(M4[currRotation[3]][0]); 
-     }
-   }
+
 }

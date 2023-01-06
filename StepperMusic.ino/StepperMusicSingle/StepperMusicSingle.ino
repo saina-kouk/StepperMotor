@@ -3,7 +3,7 @@ const int stepPin = 2;
 const int dirPin = 5;
 
 //values for timing
-bool current = 0;
+bool current = LOW;
 int duration = 100;
 int tempo = 120;
 
