@@ -51,7 +51,8 @@ void loop(){
 //Write note to motor
 void getNote(int note, long duration){
   current = !current;
-  digitalWrite(dirPin,current);
+  //change rotation direction on each note
+  digitalWrite(dirPin,current); 
   for(int i = 0; i < floor(duration); i++) {
     digitalWrite(stepPin,HIGH);
     delayMicroseconds(note);
