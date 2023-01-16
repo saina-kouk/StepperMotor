@@ -1,3 +1,5 @@
+#include <Stepper.h>
+
 //Set Variables and Pin Numbers
 const int stepPin1 = 2;
 const int stepPin2 = 3;
